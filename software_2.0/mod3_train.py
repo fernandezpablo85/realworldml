@@ -6,7 +6,7 @@ from tensorflow import keras
 def main():
     numbers = range(60_000)
     xs = np.array([util.binary_encode_digit(n, 16) for n in numbers])
-    ys = np.array([util.binary_encode_fizzbuzz(n) for n in numbers])
+    ys = np.array([util.encode_mod3(n) for n in numbers])
 
     validation_set_size = int(len(xs) * 0.2)
     train_xs = xs[:-validation_set_size]
@@ -17,21 +17,17 @@ def main():
     model = keras.Sequential(
         [
             keras.layers.Dense(
-                80,
+                256,
                 activation="relu",
                 input_shape=(xs.shape[-1],),
                 use_bias=False,
                 kernel_initializer="random_normal",
             ),
-            keras.layers.Dense(80, activation="relu", use_bias=False),
-            keras.layers.Dropout(0.3),
-            keras.layers.Dense(80, activation="relu", use_bias=False),
-            keras.layers.Dropout(0.3),
-            keras.layers.Dense(4, activation="softmax"),
+            keras.layers.Dense(1, activation="sigmoid"),
         ]
     )
 
-    model.compile(optimizer="adam", loss="categorical_crossentropy", metrics="accuracy")
+    model.compile(optimizer="adam", loss="binary_crossentropy", metrics="accuracy")
     print(model.summary())
 
     model.fit(
@@ -43,7 +39,7 @@ def main():
         validation_data=(validation_xs, validation_ys),
     )
 
-    model.save("fizzbuzz.model")
+    model.save("mod3.model")
 
 
 if __name__ == "__main__":
