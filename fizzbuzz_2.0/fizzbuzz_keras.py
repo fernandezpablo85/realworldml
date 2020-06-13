@@ -2,7 +2,8 @@ import numpy as np
 import util
 from tensorflow import keras
 
-if __name__ == "__main__":
+
+def main():
     numbers = range(60_000)
     xs = np.array([util.binary_encode_digit(n, 16) for n in numbers])
     ys = np.array([util.binary_encode_fizzbuzz(n) for n in numbers])
@@ -43,3 +44,7 @@ if __name__ == "__main__":
     )
 
     model.save("local.model")
+
+
+if __name__ == "__main__":
+    main()
