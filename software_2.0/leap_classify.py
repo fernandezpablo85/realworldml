@@ -21,7 +21,7 @@ def main():
             count_ok += 1
         print(f"{n}: {'leap' if yp else 'normal'} {error}")
     print()
-    print(classification_report(ys, ysp > 0.999))
+    print(classification_report(ys, ysp > 0.5))
 
 
 if __name__ == "__main__":
