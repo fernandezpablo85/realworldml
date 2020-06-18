@@ -39,3 +39,17 @@ def encode_mod3(number):
 
 def decode_mod3(number, prediction):
     return "Mod3" if prediction == 1 else f"{number}"
+
+
+def _leap_year(year):
+    divisible_by = lambda x: year % x == 0
+
+    if not divisible_by(4):
+        return False
+
+    return not divisible_by(100) or divisible_by(400)
+
+
+def encode_leap(number):
+    return 1 if _leap_year(number) else 0
+
