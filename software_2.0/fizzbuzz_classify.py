@@ -7,7 +7,7 @@ import crayons
 def main():
     model = keras.models.load_model("fizzbuzz.model")
 
-    numbers = range(60_000, 64_000)
+    numbers = range(61_000, 61_500)
     xs = np.array([util.binary_encode_digit(n, 16) for n in numbers])
     ys = np.array([util.binary_encode_fizzbuzz(n) for n in numbers])
     ysp = model.predict(xs)
